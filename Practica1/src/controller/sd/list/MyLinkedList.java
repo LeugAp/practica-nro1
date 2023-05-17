@@ -31,7 +31,7 @@ public class MyLinkedList<E> {
     }
 
     public void add(Integer index, E info) throws IndexException{
-        if (index < 0 || index > getSize()) throw new IndexException();
+        if (index < 0 || index >= getSize()) throw new IndexException();
 
         if (isEmpty()) {
             add(info);
@@ -62,7 +62,7 @@ public class MyLinkedList<E> {
 
     public E get (Integer index) throws EmptyException, IndexException {
         if (isEmpty()) throw new EmptyException();
-        if (index < 0 || index > getSize()) throw new IndexException();
+        if (index < 0 || index >= getSize()) throw new IndexException();
         
         if (index == 0) return this.header.getInfo();
 
@@ -76,7 +76,7 @@ public class MyLinkedList<E> {
     
     public void modify (Integer index, E info) throws EmptyException, IndexException {
         if (isEmpty()) throw new EmptyException();
-        if (index < 0 || index > getSize()) throw new IndexException();
+        if (index < 0 || index >= getSize()) throw new IndexException();
 
         if (index == 0) {
              this.header.setInfo(info);
@@ -90,25 +90,27 @@ public class MyLinkedList<E> {
         }
     }
 
-    public void delete (Integer index) throws EmptyException, IndexException {
+    public E delete (Integer index) throws EmptyException, IndexException {
         if (isEmpty()) throw new EmptyException();
-        if (index < 0 || index > getSize()) throw new IndexException();
+        if (index < 0 || index >= getSize()) throw new IndexException();
+        
+        Node<E> data = null;
         
         if (index == 0) {
-            
+            data = this.header;
             this.header = this.header.getNext();
-
-        } else {
-
-            Node<E> tmp = this.header;
-            for (int i = 0 ; i < index ; i++) {
-                tmp = tmp.getNext();
-            }
-            tmp.setNext(tmp.getNext().getNext());
-
+            return data.getInfo();
+        }   
+        
+        Node<E> tmp = this.header;
+        for (int i = 0 ; i < index - 1 ; i++) {
+            tmp = tmp.getNext();
         }
+        data = tmp.getNext();
+        tmp.setNext(tmp.getNext().getNext());
 
         this.size--;
+        return data.getInfo();
     }
 
     public void deleteAll () {
