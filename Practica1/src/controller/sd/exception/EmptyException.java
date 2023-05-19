@@ -14,7 +14,7 @@ public class EmptyException extends Exception {
         super("This position doesn't exist");
     }
 
-    public EmptyException(String ms, Throwable cause) {
-        super(ms, cause);
+    public EmptyException(String ms) {
+        super(ms);
     }
 }

@@ -77,7 +77,7 @@ public class MyLinkedList<E> {
     public void modify (Integer index, E info) throws EmptyException, IndexException {
         if (isEmpty()) throw new EmptyException();
         if (index < 0 || index >= getSize()) throw new IndexException();
-
+        
         if (index == 0) {
              this.header.setInfo(info);
         } else {
@@ -86,7 +86,7 @@ public class MyLinkedList<E> {
             for (int i = 0 ; i < index ; i++) {
                 tmp = tmp.getNext();
             }
-             tmp.setInfo(info);
+            tmp.setInfo(info);
         }
     }
 
@@ -126,12 +126,10 @@ public class MyLinkedList<E> {
         
         Node<E> tmp = this.header;
 
-        System.out.print("List [");
         while (tmp != null) {
-            System.out.print(" "+ tmp.getInfo() +", ");
+            System.out.println(" "+ tmp.getInfo() +", ");
             tmp = tmp.getNext();
         }
-        System.out.print("]");
 
     }
 
